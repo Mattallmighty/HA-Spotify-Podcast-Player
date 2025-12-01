@@ -34,8 +34,12 @@ async def validate_spotify_credentials(
             client_id=client_id, client_secret=client_secret
         )
         sp = spotipy.Spotify(auth_manager=auth_manager)
-        # Try to make a simple API call to validate credentials
-        await hass.async_add_executor_job(sp.current_user)
+        # Use search instead of current_user() since Client Credentials Flow
+        # doesn't have access to user endpoints
+        # This is a simple API call that works with app-level authentication
+        await hass.async_add_executor_job(
+            lambda: sp.search(q="podcast", type="show", limit=1)
+        )
         return True
     except Exception as err:
         _LOGGER.error("Failed to validate Spotify credentials: %s", err)
