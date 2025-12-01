@@ -1,0 +1,47 @@
+play_filtered_episode:
+  name: Play Filtered Episode
+  description: Play the latest podcast episode matching filter keywords
+  fields:
+    entity_id:
+      name: Media Player
+      description: The media player entity to play the episode on
+      required: true
+      example: "media_player.sonos_kitchen"
+      selector:
+        entity:
+          domain: media_player
+    podcast_url:
+      name: Podcast URL
+      description: Spotify podcast URL (overrides default if provided)
+      required: false
+      example: "https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A"
+      selector:
+        text:
+    filter_keywords:
+      name: Filter Keywords
+      description: Keywords to search for in episode name or description (overrides default if provided)
+      required: false
+      example: "Headlines:"
+      selector:
+        text:
+    start_time:
+      name: Start Time
+      description: Time in seconds to start playing from
+      required: false
+      default: 0
+      example: 30
+      selector:
+        number:
+          min: 0
+          max: 7200
+          unit_of_measurement: seconds
+    episodes_to_check:
+      name: Episodes to Check
+      description: Number of recent episodes to check
+      required: false
+      default: 5
+      example: 5
+      selector:
+        number:
+          min: 1
+          max: 20

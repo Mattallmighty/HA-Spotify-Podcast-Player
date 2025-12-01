@@ -1,0 +1,11 @@
+{
+  "domain": "spotify_podcast_player",
+  "name": "Spotify Podcast Player",
+  "version": "1.0.0",
+  "documentation": "https://github.com/yourusername/spotify-podcast-player",
+  "issue_tracker": "https://github.com/yourusername/spotify-podcast-player/issues",
+  "requirements": ["spotipy==2.23.0"],
+  "codeowners": ["@yourusername"],
+  "config_flow": true,
+  "iot_class": "cloud_polling"
+}

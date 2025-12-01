@@ -1,0 +1,38 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure Spotify Podcast Player",
+        "description": "Enter your Spotify API credentials and default settings. Get credentials from https://developer.spotify.com/dashboard",
+        "data": {
+          "client_id": "Spotify Client ID",
+          "client_secret": "Spotify Client Secret",
+          "podcast_url": "Default Podcast URL",
+          "filter_keywords": "Default Filter Keywords",
+          "start_time": "Default Start Time (seconds)"
+        },
+        "data_description": {
+          "client_id": "Your Spotify application Client ID",
+          "client_secret": "Your Spotify application Client Secret",
+          "podcast_url": "Spotify podcast URL (e.g., https://open.spotify.com/show/...)",
+          "filter_keywords": "Keywords to search for in episode titles or descriptions",
+          "start_time": "Number of seconds to skip at the start of playback"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid Spotify API credentials. Please check your Client ID and Client Secret.",
+      "cannot_connect": "Unable to connect to Spotify. Please check your internet connection.",
+      "unknown": "An unexpected error occurred."
+    },
+    "abort": {
+      "already_configured": "Spotify Podcast Player is already configured"
+    }
+  },
+  "services": {
+    "play_filtered_episode": {
+      "name": "Play Filtered Episode",
+      "description": "Play the latest podcast episode matching filter keywords on a media player"
+    }
+  }
+}

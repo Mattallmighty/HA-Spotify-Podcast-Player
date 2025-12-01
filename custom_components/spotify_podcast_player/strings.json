@@ -1,0 +1,23 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure Spotify Podcast Player",
+        "description": "Enter your Spotify API credentials and default settings",
+        "data": {
+          "client_id": "Spotify Client ID",
+          "client_secret": "Spotify Client Secret",
+          "podcast_url": "Default Podcast URL",
+          "filter_keywords": "Default Filter Keywords",
+          "start_time": "Default Start Time (seconds)"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Invalid Spotify API credentials. Please check your Client ID and Client Secret."
+    },
+    "abort": {
+      "already_configured": "Spotify Podcast Player is already configured"
+    }
+  }
+}
