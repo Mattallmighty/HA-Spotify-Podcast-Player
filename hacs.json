@@ -1,7 +1,7 @@
 {
-  "name": "Spotify Podcast Player",
+  "name": "HA Spotify Podcast Player",
   "content_in_root": false,
-  "filename": "spotify_podcast_player",
+  "filename": "HA_Spotify_Podcast_Player",
   "render_readme": true,
   "homeassistant": "2023.1.0"
 }

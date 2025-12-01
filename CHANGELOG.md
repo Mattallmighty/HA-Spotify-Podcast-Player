@@ -8,12 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2024-12-02
 
 ### Added
-- Initial release of Spotify Podcast Player integration
+
+- Initial release of HA Spotify Podcast Player integration
 - Play filtered podcast episodes on Home Assistant media players
 - Support for filtering by keywords in episode title or description
 - Configurable start time (seek to specific timestamp)
 - UI configuration flow for Spotify API credentials
-- Service: `spotify_podcast_player.play_filtered_episode`
+- Service: `HA_Spotify_Podcast_Player.play_filtered_episode`
 - HACS compatibility
 - Support for all Home Assistant media players
 - Configurable number of episodes to check (default: 5)
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive documentation and examples
 
 ### Features
+
 - Fetch latest episodes from any Spotify podcast
 - Filter episodes by keywords
 - Start playback at specific timestamps
@@ -29,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sonos and other media player support
 
 ### Documentation
+
 - README.md with quick start guide
 - INSTALLATION.md with detailed setup instructions
 - Example automations for common use cases
@@ -37,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
+
 - Support for multiple podcast configurations
 - Episode caching to reduce API calls
 - More advanced filtering options (regex, date-based)
@@ -51,11 +55,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### How to Upgrade
 
 Via HACS:
+
 1. Go to HACS → Integrations
-2. Find "Spotify Podcast Player"
+2. Find "HA Spotify Podcast Player"
 3. Click "Update"
 4. Restart Home Assistant
 
 Manual:
-1. Replace the `custom_components/spotify_podcast_player` folder
+
+1. Replace the `custom_components/HA_Spotify_Podcast_Player` folder
 2. Restart Home Assistant

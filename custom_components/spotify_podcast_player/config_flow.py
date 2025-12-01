@@ -1,4 +1,4 @@
-"""Config flow for Spotify Podcast Player integration."""
+"""Config flow for HA Spotify Podcast Player integration."""
 import logging
 from typing import Any
 
@@ -43,7 +43,7 @@ async def validate_spotify_credentials(
 
 
 class SpotifyPodcastPlayerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for Spotify Podcast Player."""
+    """Handle a config flow for HA Spotify Podcast Player."""
 
     VERSION = 1
 
@@ -60,7 +60,7 @@ class SpotifyPodcastPlayerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
             if await validate_spotify_credentials(self.hass, client_id, client_secret):
                 return self.async_create_entry(
-                    title="Spotify Podcast Player",
+                    title="HA Spotify Podcast Player",
                     data=user_input,
                 )
             else:

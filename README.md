@@ -1,4 +1,4 @@
-# Spotify Podcast Player for Home Assistant
+# HA Spotify Podcast Player for Home Assistant
 
 Play filtered Spotify podcast episodes on your Home Assistant media players with the ability to skip to specific timestamps.
 
@@ -14,6 +14,7 @@ Play filtered Spotify podcast episodes on your Home Assistant media players with
 ## Use Case
 
 Ideal for automations like:
+
 - Play "The Daily Aus" headlines episode at 7:00 AM
 - Automatically play the latest episode with specific keywords
 - Skip intros and go straight to content
@@ -26,15 +27,15 @@ Ideal for automations like:
 2. Click on "Integrations"
 3. Click the 3 dots in the top right corner
 4. Select "Custom repositories"
-5. Add this repository URL: `https://github.com/yourusername/spotify-podcast-player`
+5. Add this repository URL: `https://github.com/Mattallmighty/HA-Spotify-Podcast-Player`
 6. Select category: "Integration"
 7. Click "Add"
-8. Click "Install" on the Spotify Podcast Player card
+8. Click "Install" on the HA Spotify Podcast Player card
 9. Restart Home Assistant
 
 ### Manual Installation
 
-1. Copy the `custom_components/spotify_podcast_player` folder to your Home Assistant's `custom_components` directory
+1. Copy the `custom_components/HA_Spotify_Podcast_Player` folder to your Home Assistant's `custom_components` directory
 2. Restart Home Assistant
 
 ## Getting Spotify API Credentials
@@ -53,7 +54,7 @@ Ideal for automations like:
 
 1. Go to **Settings** → **Devices & Services**
 2. Click **+ Add Integration**
-3. Search for "Spotify Podcast Player"
+3. Search for "HA Spotify Podcast Player"
 4. Enter your Spotify API credentials:
    - **Client ID**: Your Spotify app client ID
    - **Client Secret**: Your Spotify app client secret
@@ -72,7 +73,7 @@ automation:
       - platform: time
         at: "07:00:00"
     action:
-      - service: spotify_podcast_player.play_filtered_episode
+      - service: HA_Spotify_Podcast_Player.play_filtered_episode
         data:
           entity_id: media_player.sonos_kitchen
           podcast_url: "https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A"
@@ -87,7 +88,7 @@ automation:
 2. Click **+ Create Automation**
 3. Add a **Time trigger** (e.g., 07:00)
 4. Add action: **Call service**
-5. Select service: `Spotify Podcast Player: Play Filtered Episode`
+5. Select service: `HA Spotify Podcast Player: Play Filtered Episode`
 6. Configure:
    - **Media Player**: Select your Sonos or other media player
    - **Podcast URL**: `https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A`
@@ -97,7 +98,7 @@ automation:
 
 ## Service Details
 
-### `spotify_podcast_player.play_filtered_episode`
+### `HA_Spotify_Podcast_Player.play_filtered_episode`
 
 Plays the latest podcast episode matching the filter keywords.
 
@@ -159,4 +160,4 @@ MIT License - See LICENSE file for details
 
 ## Support
 
-If you encounter any issues, please [open an issue](https://github.com/yourusername/spotify-podcast-player/issues) on GitHub.
+If you encounter any issues, please [open an issue](https://github.com/Mattallmighty/HA-Spotify-Podcast-Player/issues) on GitHub.

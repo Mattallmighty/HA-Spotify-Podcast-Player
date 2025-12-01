@@ -2,7 +2,7 @@
   "config": {
     "step": {
       "user": {
-        "title": "Configure Spotify Podcast Player",
+        "title": "Configure HA Spotify Podcast Player",
         "description": "Enter your Spotify API credentials and default settings",
         "data": {
           "client_id": "Spotify Client ID",
@@ -17,7 +17,7 @@
       "invalid_auth": "Invalid Spotify API credentials. Please check your Client ID and Client Secret."
     },
     "abort": {
-      "already_configured": "Spotify Podcast Player is already configured"
+      "already_configured": "HA Spotify Podcast Player is already configured"
     }
   }
 }

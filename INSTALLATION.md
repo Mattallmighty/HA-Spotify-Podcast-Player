@@ -1,6 +1,6 @@
-# Installation Guide - Spotify Podcast Player
+# Installation Guide - HA Spotify Podcast Player
 
-This guide will walk you through installing and configuring the Spotify Podcast Player integration for Home Assistant.
+This guide will walk you through installing and configuring the HA Spotify Podcast Player integration for Home Assistant.
 
 ## Table of Contents
 
@@ -23,10 +23,12 @@ This guide will walk you through installing and configuring the Spotify Podcast 
 ### Step-by-Step Guide
 
 1. **Go to Spotify Developer Dashboard**
+
    - Open https://developer.spotify.com/dashboard
    - Log in with your Spotify account
 
 2. **Create a New App**
+
    - Click the "Create app" button
    - Fill in the required fields:
      - **App Name**: `Home Assistant Podcast Player` (or any name you prefer)
@@ -35,6 +37,7 @@ This guide will walk you through installing and configuring the Spotify Podcast 
      - **Which API/SDKs are you planning to use?**: Select "Web API"
 
 3. **Accept Terms and Create**
+
    - Check the boxes to agree to Spotify's terms
    - Click "Save"
 
@@ -58,24 +61,28 @@ Client Secret: a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6
 HACS (Home Assistant Community Store) makes installation and updates easy.
 
 #### Prerequisites for HACS
+
 - HACS must be installed in your Home Assistant
 - If you don't have HACS, install it first: https://hacs.xyz/docs/setup/download
 
 #### Installation Steps
 
 1. **Open HACS**
+
    - Go to Home Assistant
    - Click on "HACS" in the sidebar
 
 2. **Add Custom Repository**
+
    - Click the 3 dots menu in the top right
    - Select "Custom repositories"
-   - Add repository URL: `https://github.com/yourusername/spotify-podcast-player`
+   - Add repository URL: `https://github.com/Mattallmighty/HA-Spotify-Podcast-Player`
    - Category: "Integration"
    - Click "Add"
 
 3. **Install Integration**
-   - Search for "Spotify Podcast Player" in HACS
+
+   - Search for "HA Spotify Podcast Player" in HACS
    - Click on it
    - Click "Download"
    - Click "Download" again to confirm
@@ -89,23 +96,26 @@ HACS (Home Assistant Community Store) makes installation and updates easy.
 If you prefer not to use HACS or want more control:
 
 1. **Download Files**
+
    - Download or clone this repository
-   - You need the `custom_components/spotify_podcast_player` folder
+   - You need the `custom_components/HA_Spotify_Podcast_Player` folder
 
 2. **Copy to Home Assistant**
+
    ```bash
    # On your Home Assistant system
    cd /config
    mkdir -p custom_components
-   cp -r spotify_podcast_player custom_components/
+   cp -r HA_Spotify_Podcast_Player custom_components/
    ```
 
 3. **Directory Structure**
    Your `config` directory should look like:
+
    ```
    config/
    ├── custom_components/
-   │   └── spotify_podcast_player/
+   │   └── HA_Spotify_Podcast_Player/
    │       ├── __init__.py
    │       ├── config_flow.py
    │       ├── const.py
@@ -126,14 +136,17 @@ If you prefer not to use HACS or want more control:
 ### Step 1: Add Integration
 
 1. **Navigate to Integrations**
+
    - Go to Settings → Devices & Services
    - Click "+ Add Integration" (bottom right)
 
 2. **Search and Select**
-   - Type "Spotify Podcast Player"
+
+   - Type "HA Spotify Podcast Player"
    - Click on it
 
 3. **Enter Configuration**
+
    - **Spotify Client ID**: Paste your Client ID from Spotify Developer Dashboard
    - **Spotify Client Secret**: Paste your Client Secret
    - **Default Podcast URL** (optional): `https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A`
@@ -148,13 +161,14 @@ If you prefer not to use HACS or want more control:
 
 1. **Check Developer Tools**
    - Go to Developer Tools → Services
-   - Search for `spotify_podcast_player.play_filtered_episode`
+   - Search for `HA_Spotify_Podcast_Player.play_filtered_episode`
    - If you see it, installation was successful!
 
 ### Step 3: Test the Service
 
 1. **In Developer Tools → Services**
-   - Service: `spotify_podcast_player.play_filtered_episode`
+
+   - Service: `HA_Spotify_Podcast_Player.play_filtered_episode`
    - Fill in:
      ```yaml
      entity_id: media_player.your_sonos
@@ -184,7 +198,7 @@ automation:
         entity_id: input_boolean.test_podcast
         to: "on"
     action:
-      - service: spotify_podcast_player.play_filtered_episode
+      - service: HA_Spotify_Podcast_Player.play_filtered_episode
         data:
           entity_id: media_player.your_sonos
           podcast_url: "https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A"
@@ -200,18 +214,20 @@ Enable debug logging to see what's happening:
 logger:
   default: info
   logs:
-    custom_components.spotify_podcast_player: debug
+    custom_components.HA_Spotify_Podcast_Player: debug
 ```
 
 Restart Home Assistant and check:
+
 - Settings → System → Logs
-- Look for messages from `custom_components.spotify_podcast_player`
+- Look for messages from `custom_components.HA_Spotify_Podcast_Player`
 
 ## Troubleshooting
 
 ### Issue: "Invalid Spotify API credentials"
 
 **Solution:**
+
 - Verify your Client ID and Client Secret are copied correctly
 - Make sure there are no extra spaces
 - Try creating a new Spotify app and use those credentials
@@ -220,6 +236,7 @@ Restart Home Assistant and check:
 ### Issue: "No episode found with filter keywords"
 
 **Solution:**
+
 - Check the podcast has recent episodes with your keywords
 - Try broader keywords (e.g., "Daily" instead of "Daily Headlines")
 - Increase `episodes_to_check` to 10 or more
@@ -228,6 +245,7 @@ Restart Home Assistant and check:
 ### Issue: Media player doesn't respond
 
 **Solution:**
+
 - Check your media player is online in Home Assistant
 - Verify the entity_id is correct
 - For Sonos: Ensure Spotify is linked to your Sonos account
@@ -237,6 +255,7 @@ Restart Home Assistant and check:
 ### Issue: Episode plays but seek doesn't work
 
 **Solution:**
+
 - Some media players don't support seeking immediately after starting
 - The integration waits 2 seconds before seeking
 - Try increasing the delay in the code if needed
@@ -245,6 +264,7 @@ Restart Home Assistant and check:
 ### Issue: Integration doesn't appear after installation
 
 **Solution:**
+
 1. Check file structure is correct
 2. Restart Home Assistant completely (not just reload)
 3. Check Home Assistant logs for errors:
@@ -256,6 +276,7 @@ Restart Home Assistant and check:
 ### Issue: "Could not connect to Spotify"
 
 **Solution:**
+
 - Check your internet connection
 - Verify Spotify's API is accessible (https://status.developer.spotify.com/)
 - Check Home Assistant can access external URLs
@@ -266,14 +287,16 @@ Restart Home Assistant and check:
 If you're still having issues:
 
 1. **Check Logs**
+
    - Settings → System → Logs
-   - Look for errors from `spotify_podcast_player`
+   - Look for errors from `HA_Spotify_Podcast_Player`
 
 2. **Enable Debug Logging**
+
    ```yaml
    logger:
      logs:
-       custom_components.spotify_podcast_player: debug
+       custom_components.HA_Spotify_Podcast_Player: debug
    ```
 
 3. **Open an Issue**
@@ -301,7 +324,7 @@ You can configure different podcasts with different settings by calling the serv
 
 ```yaml
 # Morning news
-- service: spotify_podcast_player.play_filtered_episode
+- service: HA_Spotify_Podcast_Player.play_filtered_episode
   data:
     entity_id: media_player.kitchen
     podcast_url: "https://open.spotify.com/show/NEWS_SHOW_ID"
@@ -309,7 +332,7 @@ You can configure different podcasts with different settings by calling the serv
     start_time: 0
 
 # Evening discussion
-- service: spotify_podcast_player.play_filtered_episode
+- service: HA_Spotify_Podcast_Player.play_filtered_episode
   data:
     entity_id: media_player.living_room
     podcast_url: "https://open.spotify.com/show/DISCUSSION_SHOW_ID"
@@ -341,7 +364,7 @@ automation:
         target:
           entity_id: light.kitchen
       # Play podcast
-      - service: spotify_podcast_player.play_filtered_episode
+      - service: HA_Spotify_Podcast_Player.play_filtered_episode
         data:
           entity_id: media_player.sonos_kitchen
           filter_keywords: "Headlines:"

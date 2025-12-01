@@ -1,10 +1,10 @@
 #!/bin/bash
-# Setup script for Spotify Podcast Player integration
+# Setup script for HA Spotify Podcast Player integration
 
 set -e
 
 echo "=================================="
-echo "Spotify Podcast Player Setup"
+echo "HA Spotify Podcast Player Setup"
 echo "=================================="
 echo ""
 
@@ -29,7 +29,7 @@ print_info() {
 
 # Check if we're in the right directory
 if [ ! -f "PROJECT_SUMMARY.md" ]; then
-    print_error "Please run this script from the spotify_podcast_player directory"
+    print_error "Please run this script from the HA_Spotify_Podcast_Player directory"
     exit 1
 fi
 
@@ -71,12 +71,12 @@ case $option in
         
         # Check required files
         required_files=(
-            "custom_components/spotify_podcast_player/__init__.py"
-            "custom_components/spotify_podcast_player/config_flow.py"
-            "custom_components/spotify_podcast_player/const.py"
-            "custom_components/spotify_podcast_player/manifest.json"
-            "custom_components/spotify_podcast_player/services.yaml"
-            "custom_components/spotify_podcast_player/strings.json"
+            "custom_components/HA_Spotify_Podcast_Player/__init__.py"
+            "custom_components/HA_Spotify_Podcast_Player/config_flow.py"
+            "custom_components/HA_Spotify_Podcast_Player/const.py"
+            "custom_components/HA_Spotify_Podcast_Player/manifest.json"
+            "custom_components/HA_Spotify_Podcast_Player/services.yaml"
+            "custom_components/HA_Spotify_Podcast_Player/strings.json"
             "hacs.json"
             "README.md"
         )
@@ -122,8 +122,8 @@ case $option in
         
         echo ""
         read -p "Enter your GitHub username: " github_user
-        read -p "Enter repository name (default: spotify-podcast-player): " repo_name
-        repo_name=${repo_name:-spotify-podcast-player}
+        read -p "Enter repository name (default: HA-Spotify-Podcast-Player): " repo_name
+        repo_name=${repo_name:-HA-Spotify-Podcast-Player}
         
         echo ""
         print_info "Next steps:"
@@ -143,7 +143,7 @@ case $option in
         print_info "Creating release package..."
         
         # Create a zip file
-        zip_name="spotify_podcast_player_v1.0.0.zip"
+        zip_name="HA_Spotify_Podcast_Player_v1.0.0.zip"
         
         if command -v zip &> /dev/null; then
             zip -r "$zip_name" \

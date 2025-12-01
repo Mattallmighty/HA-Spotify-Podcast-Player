@@ -1,6 +1,6 @@
 # Quick Start Guide - 5 Minutes to Your First Automation
 
-Get Spotify Podcast Player running in 5 minutes!
+Get HA Spotify Podcast Player running in 5 minutes!
 
 ## Step 1: Get Spotify Credentials (2 minutes)
 
@@ -17,23 +17,25 @@ Get Spotify Podcast Player running in 5 minutes!
 ## Step 2: Install Integration (1 minute)
 
 ### Option A: Via HACS (Recommended)
+
 1. Open **HACS** → **Integrations**
 2. Click **⋮** → **Custom repositories**
-3. Add: `https://github.com/yourusername/spotify-podcast-player`
+3. Add: `https://github.com/Mattallmighty/HA-Spotify-Podcast-Player`
 4. Category: **Integration**
 5. Click **"Install"**
 6. **Restart Home Assistant**
 
 ### Option B: Manual
+
 1. Download and extract this repository
-2. Copy `custom_components/spotify_podcast_player` to your Home Assistant's `config/custom_components/`
+2. Copy `custom_components/HA_Spotify_Podcast_Player` to your Home Assistant's `config/custom_components/`
 3. **Restart Home Assistant**
 
 ## Step 3: Configure (1 minute)
 
 1. Go to **Settings** → **Devices & Services**
 2. Click **"+ Add Integration"**
-3. Search: **"Spotify Podcast Player"**
+3. Search: **"HA Spotify Podcast Player"**
 4. Enter your credentials:
    - Paste **Client ID**
    - Paste **Client Secret**
@@ -44,6 +46,7 @@ Get Spotify Podcast Player running in 5 minutes!
 ## Step 4: Create Automation (1 minute)
 
 ### UI Method:
+
 1. Go to **Settings** → **Automations & Scenes**
 2. Click **"+ Create Automation"** → **"Create new automation"**
 3. **Trigger**:
@@ -51,7 +54,7 @@ Get Spotify Podcast Player running in 5 minutes!
    - At: **07:00:00**
 4. **Action**:
    - Action type: **Call service**
-   - Service: **Spotify Podcast Player: Play Filtered Episode**
+   - Service: **HA Spotify Podcast Player: Play Filtered Episode**
    - Media Player: Select your Sonos/speaker
    - Podcast URL: `https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A`
    - Filter Keywords: `Headlines:`
@@ -59,6 +62,7 @@ Get Spotify Podcast Player running in 5 minutes!
 5. Click **"Save"**
 
 ### YAML Method:
+
 Add to `automations.yaml`:
 
 ```yaml
@@ -67,9 +71,9 @@ Add to `automations.yaml`:
     - platform: time
       at: "07:00:00"
   action:
-    - service: spotify_podcast_player.play_filtered_episode
+    - service: HA_Spotify_Podcast_Player.play_filtered_episode
       data:
-        entity_id: media_player.sonos_kitchen  # Change to your device
+        entity_id: media_player.sonos_kitchen # Change to your device
         podcast_url: "https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A"
         filter_keywords: "Headlines:"
         start_time: 0
@@ -78,7 +82,7 @@ Add to `automations.yaml`:
 ## Step 5: Test It! (30 seconds)
 
 1. Go to **Developer Tools** → **Services**
-2. Select: `spotify_podcast_player.play_filtered_episode`
+2. Select: `HA_Spotify_Podcast_Player.play_filtered_episode`
 3. Fill in:
    ```yaml
    entity_id: media_player.your_device
@@ -91,6 +95,7 @@ Add to `automations.yaml`:
 ## Done! 🎊
 
 You now have:
+
 - ✅ Spotify integration configured
 - ✅ Automation ready to run at 7 AM
 - ✅ Ability to test anytime via Developer Tools
@@ -98,16 +103,19 @@ You now have:
 ## Common First-Time Issues
 
 ### "No episode found"
+
 - The podcast might not have recent episodes with "Headlines:" in the title
 - Try `filter_keywords: "Daily"` instead
 - Or increase `episodes_to_check: 10`
 
 ### "Invalid credentials"
+
 - Double-check you copied the full Client ID and Client Secret
 - No extra spaces
 - Try creating a new Spotify app
 
 ### Device won't play
+
 - Ensure your Sonos/speaker is online in Home Assistant
 - For Sonos: Link Spotify in the Sonos app first
 - Try playing regular Spotify content first to test
@@ -117,11 +125,13 @@ You now have:
 Now that it's working:
 
 1. **Customize your automation**:
+
    - Change the time
    - Add conditions (only weekdays)
    - Add multiple automations for different podcasts
 
 2. **Explore more podcasts**:
+
    - Find podcast URLs in Spotify (Share → Copy link)
    - Test different filter keywords
    - Use `tools/test_podcast.py` to explore
@@ -150,7 +160,7 @@ Now that it's working:
     - condition: time
       weekday: [mon, tue, wed, thu, fri]
   action:
-    - service: spotify_podcast_player.play_filtered_episode
+    - service: HA_Spotify_Podcast_Player.play_filtered_episode
       data:
         entity_id: media_player.bedroom
         filter_keywords: "Headlines:"
@@ -161,7 +171,7 @@ Now that it's working:
     - platform: state
       entity_id: input_button.play_news
   action:
-    - service: spotify_podcast_player.play_filtered_episode
+    - service: HA_Spotify_Podcast_Player.play_filtered_episode
       data:
         entity_id: media_player.kitchen
         filter_keywords: "Headlines:"
@@ -172,7 +182,7 @@ Now that it's working:
     - platform: time
       at: "18:00:00"
   action:
-    - service: spotify_podcast_player.play_filtered_episode
+    - service: HA_Spotify_Podcast_Player.play_filtered_episode
       data:
         entity_id: media_player.living_room
         podcast_url: "https://open.spotify.com/show/DIFFERENT_SHOW"

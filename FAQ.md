@@ -2,9 +2,9 @@
 
 ## General Questions
 
-### What is Spotify Podcast Player?
+### What is HA Spotify Podcast Player?
 
-Spotify Podcast Player is a Home Assistant integration that allows you to automatically play specific podcast episodes on your media players based on filter criteria. It's perfect for automating daily news podcasts or specific segments.
+HA Spotify Podcast Player is a Home Assistant integration that allows you to automatically play specific podcast episodes on your media players based on filter criteria. It's perfect for automating daily news podcasts or specific segments.
 
 ### Do I need a Spotify Premium account?
 
@@ -13,6 +13,7 @@ No! A free Spotify account is sufficient. However, you do need to create a Spoti
 ### Does this work with any media player?
 
 Yes, it works with any media player that supports Spotify playback in Home Assistant, including:
+
 - Sonos
 - Google Home/Nest
 - Amazon Echo (with Spotify linked)
@@ -41,8 +42,9 @@ No! This integration uses client credentials flow, so redirect URIs are not need
 ### Can I change the default settings after setup?
 
 Currently, you need to reconfigure the integration:
+
 1. Go to Settings → Devices & Services
-2. Find "Spotify Podcast Player"
+2. Find "HA Spotify Podcast Player"
 3. Click "Configure"
 4. Update your settings
 
@@ -60,6 +62,7 @@ Currently, you need to reconfigure the integration:
 The integration searches for your keywords in both the episode **title** and **description**. The search is case-insensitive.
 
 For example:
+
 - Keywords: `Headlines:` will match "Headlines: December 2nd" or any description containing "headlines:"
 - Keywords: `Full Episode` will match episodes with that phrase
 - Keywords: `Monday` will match episodes with Monday in the title or description
@@ -73,7 +76,7 @@ The integration plays the **most recent** episode that matches. It checks the la
 Yes! Use the `start_time` parameter to skip ahead:
 
 ```yaml
-start_time: 30  # Skip first 30 seconds
+start_time: 30 # Skip first 30 seconds
 ```
 
 ### Why isn't the seek working?
@@ -132,7 +135,7 @@ Add this to your `configuration.yaml`:
 logger:
   default: info
   logs:
-    custom_components.spotify_podcast_player: debug
+    custom_components.HA_Spotify_Podcast_Player: debug
 ```
 
 Then restart Home Assistant and check Settings → System → Logs.
@@ -146,6 +149,7 @@ Yes, but you'd need to set up separate Home Assistant instances or manually mana
 ### Can I filter by date or episode number?
 
 Not currently. The integration filters by keywords only. However, you can:
+
 - Set `episodes_to_check: 1` to always get the absolute latest episode
 - Use date-specific keywords like "December 2nd" if the podcast titles include dates
 
@@ -164,6 +168,7 @@ It checks every time the service is called. It doesn't continuously monitor for 
 ### Does this use my Spotify API quota?
 
 Yes, each service call makes 1-2 API requests:
+
 - 1 request to fetch episodes
 - 1 request to play the episode
 
@@ -184,7 +189,7 @@ automation:
         event_data:
           event_id: play_news
     action:
-      - service: spotify_podcast_player.play_filtered_episode
+      - service: HA_Spotify_Podcast_Player.play_filtered_episode
         data:
           entity_id: media_player.echo_kitchen
           filter_keywords: "Headlines:"
@@ -193,6 +198,7 @@ automation:
 ### Can I use this with other Home Assistant automations?
 
 Absolutely! You can combine it with:
+
 - Time triggers (play at 7 AM)
 - Presence detection (play when I arrive home)
 - Button presses
@@ -205,7 +211,7 @@ Yes, add a notification action to your automation:
 
 ```yaml
 action:
-  - service: spotify_podcast_player.play_filtered_episode
+  - service: HA_Spotify_Podcast_Player.play_filtered_episode
     data:
       entity_id: media_player.sonos
       filter_keywords: "Headlines:"
@@ -217,6 +223,7 @@ action:
 ### Can this work offline?
 
 No, it requires internet access to:
+
 - Authenticate with Spotify API
 - Fetch episode information
 - Stream content to your media player
@@ -226,19 +233,22 @@ No, it requires internet access to:
 ### How do I update the integration?
 
 **Via HACS:**
+
 1. Go to HACS → Integrations
-2. Find "Spotify Podcast Player"
+2. Find "HA Spotify Podcast Player"
 3. Click "Update" if available
 4. Restart Home Assistant
 
 **Manual:**
+
 1. Download the latest release
-2. Replace the `custom_components/spotify_podcast_player` folder
+2. Replace the `custom_components/HA_Spotify_Podcast_Player` folder
 3. Restart Home Assistant
 
 ### Will updates break my automations?
 
 We follow semantic versioning:
+
 - Major versions (2.0.0): May have breaking changes
 - Minor versions (1.1.0): New features, backward compatible
 - Patch versions (1.0.1): Bug fixes, backward compatible
@@ -263,6 +273,7 @@ Check the [CHANGELOG.md](CHANGELOG.md) file for detailed release notes.
 ### How can I contribute?
 
 Contributions are welcome!
+
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
@@ -271,6 +282,7 @@ Contributions are welcome!
 ### Can I request features?
 
 Yes! Open a GitHub issue with:
+
 - Clear description of the feature
 - Use case/example
 - Why it would be useful
@@ -278,7 +290,8 @@ Yes! Open a GitHub issue with:
 ### Is there a community forum?
 
 Check the Home Assistant Community forums for discussions:
-- Tag: `spotify-podcast-player`
+
+- Tag: `HA-Spotify-Podcast-Player`
 - Category: Custom Integrations
 
 ## Privacy & Security Questions
@@ -286,6 +299,7 @@ Check the Home Assistant Community forums for discussions:
 ### What data does this integration collect?
 
 The integration:
+
 - **Does NOT** collect or store any personal data
 - **Does NOT** send data to third parties (except Spotify API calls)
 - Only stores your Spotify credentials locally in Home Assistant
@@ -294,6 +308,7 @@ The integration:
 ### Are my Spotify credentials secure?
 
 Yes:
+
 - Credentials are stored in Home Assistant's encrypted storage
 - They're never logged or transmitted except to Spotify's API
 - Use Home Assistant's security best practices (HTTPS, strong passwords)
@@ -301,10 +316,12 @@ Yes:
 ### Can this integration control my Spotify account?
 
 No! It only has permission to:
+
 - Read podcast information
 - Send playback commands to your media players
 
 It cannot:
+
 - Access your personal playlists
 - See your listening history
 - Modify your Spotify account

@@ -1,6 +1,6 @@
 # Architecture & How It Works
 
-This document explains the technical architecture and workflow of the Spotify Podcast Player integration.
+This document explains the technical architecture and workflow of the HA Spotify Podcast Player integration.
 
 ## Table of Contents
 
@@ -17,7 +17,7 @@ This document explains the technical architecture and workflow of the Spotify Po
 │                      Home Assistant                             │
 │                                                                 │
 │  ┌──────────────────────────────────────────────────────────┐  │
-│  │         Spotify Podcast Player Integration              │  │
+│  │         HA Spotify Podcast Player Integration              │  │
 │  │                                                          │  │
 │  │  ┌────────────┐  ┌──────────────┐  ┌───────────────┐  │  │
 │  │  │Config Flow │  │ Service Layer│  │ Spotify API   │  │  │
@@ -50,14 +50,16 @@ This document explains the technical architecture and workflow of the Spotify Po
 **Purpose**: Handles the UI-based setup of the integration
 
 **Responsibilities**:
+
 - Collects Spotify API credentials (Client ID, Client Secret)
 - Validates credentials by testing connection to Spotify
 - Stores configuration in Home Assistant's encrypted storage
 - Provides default values for podcast URL, filter keywords, and start time
 
 **User Interaction**:
+
 ```
-User → Settings → Add Integration → Spotify Podcast Player
+User → Settings → Add Integration → HA Spotify Podcast Player
      → Enter credentials → Validation → Save
 ```
 
@@ -66,6 +68,7 @@ User → Settings → Add Integration → Spotify Podcast Player
 **Purpose**: Main integration logic and service registration
 
 **Responsibilities**:
+
 - Initializes the integration when Home Assistant starts
 - Registers the `play_filtered_episode` service
 - Handles service calls from automations
@@ -73,6 +76,7 @@ User → Settings → Add Integration → Spotify Podcast Player
 - Orchestrates the episode search and playback process
 
 **Key Functions**:
+
 ```python
 async_setup_entry()         # Setup integration
 handle_play_filtered_episode()  # Main service handler
@@ -84,6 +88,7 @@ async_unload_entry()        # Cleanup on removal
 **Purpose**: Centralized configuration and constant values
 
 **Contains**:
+
 - Domain name
 - Configuration keys
 - Default values
@@ -95,6 +100,7 @@ async_unload_entry()        # Cleanup on removal
 **Purpose**: Describes the service for Home Assistant's UI
 
 **Defines**:
+
 - Service name and description
 - Input parameters and their types
 - Parameter validation rules
@@ -105,6 +111,7 @@ async_unload_entry()        # Cleanup on removal
 **Purpose**: Internationalization support
 
 **Contains**:
+
 - UI text for configuration flow
 - Error messages
 - Service descriptions
@@ -124,7 +131,7 @@ Load Integration (async_setup_entry)
         │   (Client ID, Client Secret, defaults)
         │
         ├─→ Register service
-        │   (spotify_podcast_player.play_filtered_episode)
+        │   (HA_Spotify_Podcast_Player.play_filtered_episode)
         │
         └─→ Ready to handle service calls
 ```
@@ -257,20 +264,21 @@ def find_matching_episode(episodes, filter_keywords):
     4. Return first match
     """
     keywords_lower = filter_keywords.lower()
-    
+
     for episode in episodes:
         name = episode.get("name", "").lower()
         description = episode.get("description", "").lower()
-        
+
         if keywords_lower in name or keywords_lower in description:
             return episode
-    
+
     return None
 ```
 
 ### Media Player Commands
 
 #### Play Media
+
 ```python
 await hass.services.async_call(
     "media_player",
@@ -285,6 +293,7 @@ await hass.services.async_call(
 ```
 
 #### Seek
+
 ```python
 await hass.services.async_call(
     "media_player",
@@ -310,6 +319,7 @@ except Exception as err:
 ```
 
 **Error Categories**:
+
 1. **Authentication Errors**: Invalid credentials
 2. **Network Errors**: Connection timeout, API unavailable
 3. **Data Errors**: Invalid podcast URL, no episodes found
@@ -331,10 +341,11 @@ _LOGGER.error("No episodes found for show: %s", show_id)
 ```
 
 **Enable Debug Logging**:
+
 ```yaml
 logger:
   logs:
-    custom_components.spotify_podcast_player: debug
+    custom_components.HA_Spotify_Podcast_Player: debug
 ```
 
 ### Asynchronous Operations
@@ -354,6 +365,7 @@ await hass.services.async_call(...)
 ### State Management
 
 The integration is **stateless** by design:
+
 - No persistent state between calls
 - Each service call is independent
 - Configuration stored in Home Assistant's config entry
@@ -380,10 +392,12 @@ The integration is **stateless** by design:
 ### Rate Limits
 
 **Spotify API Limits**:
+
 - Free tier: ~180 requests per minute
 - Daily limit: ~10,000+ requests
 
 **Integration Usage**:
+
 - Typical automation: 2 API calls
 - Daily automation (once/day): ~60 calls/month
 - Well below Spotify limits
@@ -393,24 +407,28 @@ The integration is **stateless** by design:
 The integration is designed for extensibility:
 
 ### 1. Additional Filters
+
 ```python
 # Current: keyword matching
 # Possible: regex, date-based, duration filters
 ```
 
 ### 2. Multi-Podcast Support
+
 ```python
 # Store multiple podcast configurations
 # Switch between them in automations
 ```
 
 ### 3. Caching Layer
+
 ```python
 # Cache episode lists to reduce API calls
 # Invalidate cache periodically
 ```
 
 ### 4. Queue Management
+
 ```python
 # Build episode queues
 # Play multiple episodes sequentially
@@ -439,6 +457,7 @@ The integration is designed for extensibility:
 ## Testing Strategy
 
 ### Unit Tests (Future Enhancement)
+
 ```python
 # test_filter.py
 def test_episode_filtering():
@@ -448,6 +467,7 @@ def test_episode_filtering():
 ```
 
 ### Integration Tests
+
 ```python
 # test_service.py
 async def test_service_call(hass):
@@ -472,22 +492,28 @@ async def test_service_call(hass):
 ## Troubleshooting Tools
 
 ### 1. Test Script
+
 Use `tools/test_podcast.py` to:
+
 - Verify credentials
 - List recent episodes
 - Test filter keywords
 
 ### 2. Debug Logging
+
 Enable detailed logs:
+
 ```yaml
 logger:
   logs:
-    custom_components.spotify_podcast_player: debug
+    custom_components.HA_Spotify_Podcast_Player: debug
     spotipy: debug
 ```
 
 ### 3. Developer Tools
+
 Use Home Assistant's Developer Tools:
+
 - **Services**: Test service calls manually
 - **States**: Check media player states
 - **Logs**: View real-time logs

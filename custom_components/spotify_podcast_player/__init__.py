@@ -1,4 +1,4 @@
-"""The Spotify Podcast Player integration."""
+"""The HA Spotify Podcast Player integration."""
 import logging
 import re
 from datetime import timedelta
@@ -51,13 +51,13 @@ SERVICE_PLAY_FILTERED_EPISODE_SCHEMA = vol.Schema(
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    """Set up the Spotify Podcast Player component."""
+    """Set up the HA Spotify Podcast Player component."""
     hass.data.setdefault(DOMAIN, {})
     return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up Spotify Podcast Player from a config entry."""
+    """Set up HA Spotify Podcast Player from a config entry."""
     hass.data.setdefault(DOMAIN, {})
     hass.data[DOMAIN][entry.entry_id] = {
         CONF_CLIENT_ID: entry.data[CONF_CLIENT_ID],

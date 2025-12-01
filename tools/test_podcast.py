@@ -25,7 +25,7 @@ except ImportError:
 
 def main():
     print("=" * 60)
-    print("Spotify Podcast Player - Helper Script")
+    print("HA Spotify Podcast Player - Helper Script")
     print("=" * 60)
     print()
 
@@ -147,7 +147,7 @@ def main():
             print("\nUse this in your automation:")
             print(
                 f"""
-service: spotify_podcast_player.play_filtered_episode
+service: HA_Spotify_Podcast_Player.play_filtered_episode
 data:
   entity_id: media_player.your_device
   podcast_url: "{podcast_url}"

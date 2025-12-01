@@ -1,8 +1,9 @@
-# Project Summary - Spotify Podcast Player for Home Assistant
+# Project Summary - HA Spotify Podcast Player for Home Assistant
 
 ## What You've Got
 
 A complete, production-ready Home Assistant custom integration that can:
+
 - ✅ Play specific Spotify podcast episodes on any media player
 - ✅ Filter episodes by keywords (e.g., "Headlines:")
 - ✅ Skip to specific timestamps
@@ -13,8 +14,8 @@ A complete, production-ready Home Assistant custom integration that can:
 ## Project Structure
 
 ```
-spotify_podcast_player/
-├── custom_components/spotify_podcast_player/  # Main integration
+HA_Spotify_Podcast_Player/
+├── custom_components/HA_Spotify_Podcast_Player/  # Main integration
 │   ├── __init__.py                            # Core logic & service
 │   ├── config_flow.py                         # UI configuration
 │   ├── const.py                               # Constants
@@ -47,6 +48,7 @@ spotify_podcast_player/
 ### Core Integration Files
 
 1. **`__init__.py`** (Main Integration)
+
    - Registers the `play_filtered_episode` service
    - Handles Spotify API authentication
    - Fetches and filters podcast episodes
@@ -54,23 +56,27 @@ spotify_podcast_player/
    - ~200 lines of well-documented Python
 
 2. **`config_flow.py`** (Configuration UI)
+
    - UI-based setup for Spotify credentials
    - Validates credentials on entry
    - Stores encrypted configuration
    - ~100 lines
 
 3. **`const.py`** (Constants)
+
    - Domain name and configuration keys
    - Default values
    - Service and attribute names
    - ~30 lines
 
 4. **`manifest.json`** (Integration Metadata)
+
    - Name, version, requirements
    - HACS compatibility markers
    - Integration classification
 
 5. **`services.yaml`** (Service Definitions)
+
    - Describes the `play_filtered_episode` service
    - Parameter types and validation
    - UI selectors
@@ -83,6 +89,7 @@ spotify_podcast_player/
 ### Documentation Files
 
 1. **`README.md`**
+
    - Project overview
    - Features list
    - Quick installation guide
@@ -90,12 +97,14 @@ spotify_podcast_player/
    - Troubleshooting
 
 2. **`QUICKSTART.md`**
+
    - 5-minute setup guide
    - Step-by-step instructions
    - Common issues
    - First automation examples
 
 3. **`INSTALLATION.md`**
+
    - Detailed installation guide
    - Spotify credential setup
    - HACS vs manual installation
@@ -103,6 +112,7 @@ spotify_podcast_player/
    - Comprehensive troubleshooting
 
 4. **`ARCHITECTURE.md`**
+
    - Technical architecture
    - Data flow diagrams
    - Component overview
@@ -110,6 +120,7 @@ spotify_podcast_player/
    - Extension points
 
 5. **`FAQ.md`**
+
    - 40+ common questions
    - Setup help
    - Usage tips
@@ -124,14 +135,17 @@ spotify_podcast_player/
 ### Supporting Files
 
 1. **`hacs.json`**
+
    - HACS repository configuration
    - Marks integration as HACS-compatible
 
 2. **`info.md`**
+
    - Displayed in HACS panel
    - Quick overview for users
 
 3. **`examples/automations.yaml`**
+
    - 6 ready-to-use automation examples
    - Time-triggered
    - Button-triggered
@@ -139,6 +153,7 @@ spotify_podcast_player/
    - Multi-podcast setups
 
 4. **`tools/test_podcast.py`**
+
    - Command-line testing tool
    - Validates Spotify credentials
    - Lists episodes
@@ -156,12 +171,12 @@ spotify_podcast_player/
 ### 1. Create GitHub Repository
 
 ```bash
-cd /path/to/spotify_podcast_player
+cd /path/to/HA_Spotify_Podcast_Player
 git init
 git add .
 git commit -m "Initial release v1.0.0"
 git branch -M main
-git remote add origin https://github.com/YOURUSERNAME/spotify-podcast-player.git
+git remote add origin https://github.com/Mattallmighty/HA-Spotify-Podcast-Player.git
 git push -u origin main
 ```
 
@@ -177,6 +192,7 @@ git push -u origin main
 ### 3. Add to HACS (Optional - for wider distribution)
 
 To add to the default HACS repository list:
+
 1. Fork https://github.com/hacs/default
 2. Edit `integration` file
 3. Add your repository
@@ -187,19 +203,21 @@ Or users can add manually using custom repositories.
 ## How Users Install
 
 ### Via HACS
+
 1. HACS → Integrations → Custom Repositories
-2. Add: `https://github.com/YOURUSERNAME/spotify-podcast-player`
+2. Add: `https://github.com/Mattallmighty/HA-Spotify-Podcast-Player`
 3. Install → Restart Home Assistant
 
 ### Manual
+
 1. Download repository
-2. Copy `custom_components/spotify_podcast_player` to `config/custom_components/`
+2. Copy `custom_components/HA_Spotify_Podcast_Player` to `config/custom_components/`
 3. Restart Home Assistant
 
 ## Configuration for Users
 
 1. Settings → Devices & Services → Add Integration
-2. Search "Spotify Podcast Player"
+2. Search "HA Spotify Podcast Player"
 3. Enter Spotify Client ID and Secret
 4. (Optional) Set default podcast URL and filter keywords
 5. Done!
@@ -216,7 +234,7 @@ automation:
       - condition: time
         weekday: [mon, tue, wed, thu, fri]
     action:
-      - service: spotify_podcast_player.play_filtered_episode
+      - service: HA_Spotify_Podcast_Player.play_filtered_episode
         data:
           entity_id: media_player.sonos_kitchen
           podcast_url: "https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A"
@@ -228,6 +246,7 @@ automation:
 ## Key Features Implemented
 
 ### Core Functionality
+
 - ✅ Spotify API integration with Client Credentials flow
 - ✅ Episode fetching and filtering
 - ✅ Keyword search in title and description
@@ -236,6 +255,7 @@ automation:
 - ✅ Works with any Spotify-compatible media player
 
 ### User Experience
+
 - ✅ UI-based configuration (no YAML required)
 - ✅ Credential validation on setup
 - ✅ Encrypted credential storage
@@ -244,6 +264,7 @@ automation:
 - ✅ Service description in UI
 
 ### Developer Experience
+
 - ✅ Clean, documented code
 - ✅ Follows Home Assistant conventions
 - ✅ Async/await patterns
@@ -252,6 +273,7 @@ automation:
 - ✅ CI/CD workflow
 
 ### Documentation
+
 - ✅ 6 comprehensive guides
 - ✅ 40+ FAQ answers
 - ✅ Example automations
@@ -262,28 +284,33 @@ automation:
 ## What Makes This Production-Ready
 
 1. **Robust Error Handling**
+
    - Invalid credentials
    - Network failures
    - Missing episodes
    - Media player errors
 
 2. **Comprehensive Logging**
+
    - Info level for operations
    - Debug level for details
    - Error level with stack traces
 
 3. **User-Friendly Configuration**
+
    - UI-based setup
    - Validation on entry
    - Clear error messages
    - Optional defaults
 
 4. **Flexible Usage**
+
    - Override defaults per call
    - Multiple automations supported
    - Works with any media player
 
 5. **HACS Compatible**
+
    - Proper manifest
    - Valid structure
    - Documentation
@@ -344,7 +371,8 @@ MIT License - Users can freely use, modify, and distribute.
 
 ## Next Steps
 
-1. **Update URLs**: Replace `yourusername` in:
+1. **Update URLs**: Replace `Mattallmighty` in:
+
    - manifest.json
    - README.md
    - INSTALLATION.md
@@ -370,6 +398,7 @@ For ongoing maintenance:
 ## Success Metrics
 
 Track:
+
 - GitHub stars
 - HACS installations (if added to default)
 - Issue resolution time
@@ -379,6 +408,7 @@ Track:
 ## Community Engagement
 
 Share on:
+
 - Home Assistant Community forums
 - Reddit r/homeassistant
 - Home Assistant Discord
