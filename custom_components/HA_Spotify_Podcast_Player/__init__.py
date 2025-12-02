@@ -100,16 +100,18 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         client_secret = entry.data[CONF_CLIENT_SECRET]
 
         try:
-            # Authenticate with Spotify
+            # Authenticate with Spotify (disable cache to ensure fresh data)
             auth_manager = SpotifyClientCredentials(
-                client_id=client_id, client_secret=client_secret
+                client_id=client_id,
+                client_secret=client_secret,
+                cache_handler=None
             )
             sp = spotipy.Spotify(auth_manager=auth_manager)
 
-            # Get show episodes
+            # Get show episodes (use lambda to ensure correct parameter passing)
             _LOGGER.info("Fetching episodes for show: %s", show_id)
             results = await hass.async_add_executor_job(
-                sp.show_episodes, show_id, None, episodes_to_check
+                lambda: sp.show_episodes(show_id, limit=episodes_to_check, offset=0)
             )
 
             if not results or "items" not in results:
