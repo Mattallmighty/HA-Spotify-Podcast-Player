@@ -71,7 +71,7 @@ Add to `automations.yaml`:
     - platform: time
       at: "07:00:00"
   action:
-    - service: HA_Spotify_Podcast_Player.play_filtered_episode
+    - service: ha_spotify_podcast_player.play_filtered_episode
       data:
         entity_id: media_player.sonos_kitchen # Change to your device
         podcast_url: "https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A"
@@ -82,7 +82,7 @@ Add to `automations.yaml`:
 ## Step 5: Test It! (30 seconds)
 
 1. Go to **Developer Tools** → **Services**
-2. Select: `HA_Spotify_Podcast_Player.play_filtered_episode`
+2. Select: `ha_spotify_podcast_player.play_filtered_episode`
 3. Fill in:
    ```yaml
    entity_id: media_player.your_device
@@ -160,7 +160,7 @@ Now that it's working:
     - condition: time
       weekday: [mon, tue, wed, thu, fri]
   action:
-    - service: HA_Spotify_Podcast_Player.play_filtered_episode
+    - service: ha_spotify_podcast_player.play_filtered_episode
       data:
         entity_id: media_player.bedroom
         filter_keywords: "Headlines:"
@@ -171,7 +171,7 @@ Now that it's working:
     - platform: state
       entity_id: input_button.play_news
   action:
-    - service: HA_Spotify_Podcast_Player.play_filtered_episode
+    - service: ha_spotify_podcast_player.play_filtered_episode
       data:
         entity_id: media_player.kitchen
         filter_keywords: "Headlines:"
@@ -182,7 +182,7 @@ Now that it's working:
     - platform: time
       at: "18:00:00"
   action:
-    - service: HA_Spotify_Podcast_Player.play_filtered_episode
+    - service: ha_spotify_podcast_player.play_filtered_episode
       data:
         entity_id: media_player.living_room
         podcast_url: "https://open.spotify.com/show/DIFFERENT_SHOW"

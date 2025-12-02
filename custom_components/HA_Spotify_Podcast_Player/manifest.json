@@ -1,7 +1,7 @@
 {
-  "domain": "HA_Spotify_Podcast_Player",
+  "domain": "ha_spotify_podcast_player",
   "name": "HA Spotify Podcast Player",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "documentation": "https://github.com/Mattallmighty/HA-Spotify-Podcast-Player",
   "issue_tracker": "https://github.com/Mattallmighty/HA-Spotify-Podcast-Player/issues",
   "requirements": [

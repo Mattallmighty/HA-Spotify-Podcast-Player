@@ -17,7 +17,7 @@ automation:
           - thu
           - fri
     action:
-      - service: HA_Spotify_Podcast_Player.play_filtered_episode
+      - service: ha_spotify_podcast_player.play_filtered_episode
         data:
           entity_id: media_player.sonos_kitchen
           podcast_url: "https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A"
@@ -32,7 +32,7 @@ automation:
       - platform: time
         at: "18:00:00"
     action:
-      - service: HA_Spotify_Podcast_Player.play_filtered_episode
+      - service: ha_spotify_podcast_player.play_filtered_episode
         data:
           entity_id: media_player.sonos_living_room
           podcast_url: "https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A"
@@ -47,7 +47,7 @@ automation:
       - platform: state
         entity_id: input_button.play_headlines
     action:
-      - service: HA_Spotify_Podcast_Player.play_filtered_episode
+      - service: ha_spotify_podcast_player.play_filtered_episode
         data:
           entity_id: media_player.sonos_bedroom
           podcast_url: "https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A"
@@ -62,7 +62,7 @@ automation:
         event_data:
           event_id: play_news
     action:
-      - service: HA_Spotify_Podcast_Player.play_filtered_episode
+      - service: ha_spotify_podcast_player.play_filtered_episode
         data:
           entity_id: media_player.echo_kitchen
           podcast_url: "https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A"
@@ -75,7 +75,7 @@ automation:
       - platform: time
         at: "06:00:00"
     action:
-      - service: HA_Spotify_Podcast_Player.play_filtered_episode
+      - service: ha_spotify_podcast_player.play_filtered_episode
         data:
           entity_id: media_player.sonos_bedroom
           podcast_url: "https://open.spotify.com/show/4YEO4IHZB9DZOBWT6QSXHT" # Replace with actual NPR show ID

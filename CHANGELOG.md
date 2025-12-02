@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4] - 2025-12-02
+
+### Fixed
+- **BREAKING**: Changed domain from `HA_Spotify_Podcast_Player` to `ha_spotify_podcast_player` to follow Home Assistant standards
+- Fixed services.yaml not loading (was causing UI fields to not appear in automations)
+- Service UI fields now properly display in Home Assistant automation editor
+
+### Changed
+- Service name is now `ha_spotify_podcast_player.play_filtered_episode` (lowercase)
+- Updated all documentation and examples to use lowercase service name
+
+### Migration Notes
+- **Action Required**: If you have existing automations, update the service name from `HA_Spotify_Podcast_Player.play_filtered_episode` to `ha_spotify_podcast_player.play_filtered_episode`
+- You will need to re-add the integration in Home Assistant after upgrading
+- Folder name remains `HA_Spotify_Podcast_Player` for HACS compatibility
+
 ## [1.0.3] - 2025-12-02
 
 ### Fixed

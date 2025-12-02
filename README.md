@@ -120,7 +120,7 @@ actions:
 
 ## Service Details
 
-### `HA_Spotify_Podcast_Player.play_filtered_episode`
+### `ha_spotify_podcast_player.play_filtered_episode`
 
 Plays the latest podcast episode matching the filter keywords.
 

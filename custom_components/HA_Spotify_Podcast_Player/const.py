@@ -1,6 +1,6 @@
 """Constants for the HA Spotify Podcast Player integration."""
 
-DOMAIN = "HA_Spotify_Podcast_Player"
+DOMAIN = "ha_spotify_podcast_player"
 
 # Configuration keys
 CONF_CLIENT_ID = "client_id"
