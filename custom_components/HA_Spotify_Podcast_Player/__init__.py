@@ -116,23 +116,24 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 _LOGGER.error("No episodes found for show: %s", show_id)
                 return
 
+            # Log all episodes found for debugging
+            _LOGGER.info("Found %d episodes, checking for filter: '%s'", len(results["items"]), filter_keywords)
+            for idx, ep in enumerate(results["items"]):
+                _LOGGER.info("Episode %d: '%s' (Released: %s)", idx + 1, ep.get("name", ""), ep.get("release_date", ""))
+
             # Find the first episode matching the filter
             matching_episode = None
             for episode in results["items"]:
                 episode_name = episode.get("name", "")
                 episode_description = episode.get("description", "")
 
-                _LOGGER.debug(
-                    "Checking episode: %s (Description: %s)",
-                    episode_name,
-                    episode_description[:100],
-                )
-
                 # Check if filter keywords are in the episode name or description
                 if filter_keywords.lower() in episode_name.lower() or filter_keywords.lower() in episode_description.lower():
                     matching_episode = episode
-                    _LOGGER.info("Found matching episode: %s", episode_name)
+                    _LOGGER.info("✓ MATCHED episode: '%s' (Released: %s)", episode_name, episode.get("release_date", ""))
                     break
+                else:
+                    _LOGGER.debug("✗ Skipped episode: '%s' - does not contain '%s'", episode_name, filter_keywords)
 
             if not matching_episode:
                 _LOGGER.warning(
