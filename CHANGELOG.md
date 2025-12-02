@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2025-12-02
+
+### Added
+- Enhanced logging to show all episodes checked during filtering
+- Detailed episode selection debugging (episode names, release dates, match status)
+
+### Changed
+- Updated README with HACS store installation instructions
+- Improved automation examples with current Home Assistant YAML format
+- Added visual editor (UI) automation setup instructions
+- Updated service call format in documentation
+
+### Fixed
+- Service now correctly displays input fields in Home Assistant visual editor
+- Episode selection now always chooses the latest matching episode
+
 ## [1.0.0] - 2024-12-02
 
 ### Added
