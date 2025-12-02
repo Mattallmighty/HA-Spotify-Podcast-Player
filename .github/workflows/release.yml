@@ -1,0 +1,73 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Triggers on version tags like v1.0.1, v1.2.0, etc.
+
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Get full history for changelog
+      
+      - name: Get version from tag
+        id: get_version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      
+      - name: Verify manifest.json version matches tag
+        run: |
+          MANIFEST_VERSION=$(cat custom_components/HA_Spotify_Podcast_Player/manifest.json | jq -r '.version')
+          TAG_VERSION="${{ steps.get_version.outputs.version }}"
+          
+          if [ "$MANIFEST_VERSION" != "$TAG_VERSION" ]; then
+            echo "❌ Error: manifest.json version ($MANIFEST_VERSION) doesn't match tag ($TAG_VERSION)"
+            exit 1
+          fi
+          
+          echo "✅ Version check passed: $MANIFEST_VERSION"
+      
+      - name: Extract changelog for this version
+        id: changelog
+        run: |
+          VERSION="${{ steps.get_version.outputs.version }}"
+          
+          # Extract changelog section for this version
+          CHANGELOG=$(awk -v ver="$VERSION" '
+            /^## \['"$VERSION"'\]/ {found=1; next}
+            /^## \[/ {if (found) exit}
+            found {print}
+          ' CHANGELOG.md)
+          
+          if [ -z "$CHANGELOG" ]; then
+            CHANGELOG="Release version $VERSION"
+          fi
+          
+          # Save to file for multiline support
+          echo "$CHANGELOG" > /tmp/changelog.txt
+      
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ steps.get_version.outputs.tag }}
+          body_path: /tmp/changelog.txt
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Notify success
+        run: |
+          echo "✅ Release ${{ steps.get_version.outputs.tag }} created successfully!"
+          echo "🎉 HACS users will be notified of the update"
