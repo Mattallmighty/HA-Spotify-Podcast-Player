@@ -23,6 +23,14 @@ Ideal for automations like:
 
 ### Via HACS (Recommended)
 
+**Option 1: Install from HACS Store (Easiest)**
+1. Open HACS in your Home Assistant
+2. Go to "Integrations"
+3. Search for "HA Spotify Podcast Player"
+4. Click "Download"
+5. Restart Home Assistant
+
+**Option 2: Install as Custom Repository (If not in store)**
 1. Open HACS in your Home Assistant
 2. Click on "Integrations"
 3. Click the 3 dots in the top right corner
@@ -30,7 +38,7 @@ Ideal for automations like:
 5. Add this repository URL: `https://github.com/Mattallmighty/HA-Spotify-Podcast-Player`
 6. Select category: "Integration"
 7. Click "Add"
-8. Click "Install" on the HA Spotify Podcast Player card
+8. Click "Download" on the HA Spotify Podcast Player card
 9. Restart Home Assistant
 
 ### Manual Installation
@@ -64,37 +72,51 @@ Ideal for automations like:
 
 ### Step 2: Create Automation
 
-#### Example: Play Daily Headlines at 7 AM
-
-```yaml
-automation:
-  - alias: "Play Daily Aus Headlines"
-    trigger:
-      - platform: time
-        at: "07:00:00"
-    action:
-      - service: HA_Spotify_Podcast_Player.play_filtered_episode
-        data:
-          entity_id: media_player.sonos_kitchen
-          podcast_url: "https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A"
-          filter_keywords: "Headlines:"
-          start_time: 0
-          episodes_to_check: 5
-```
-
-#### Example: UI Automation
+#### Example 1: UI Automation (Visual Editor)
 
 1. Go to **Settings** → **Automations & Scenes**
-2. Click **+ Create Automation**
-3. Add a **Time trigger** (e.g., 07:00)
-4. Add action: **Call service**
-5. Select service: `HA Spotify Podcast Player: Play Filtered Episode`
-6. Configure:
-   - **Media Player**: Select your Sonos or other media player
-   - **Podcast URL**: `https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A`
-   - **Filter Keywords**: `Headlines:`
-   - **Start Time**: `0` (or any number of seconds)
-   - **Episodes to Check**: `5`
+2. Click **+ Create Automation** → **Create new automation**
+3. Set up the trigger:
+   - Click **Add Trigger**
+   - Select **Time**
+   - Set time to **07:00:00**
+   - (Optional) Set weekdays: Mon, Tue, Wed, Thu, Fri
+4. Set up the action:
+   - Click **Add Action**
+   - Select **Call service**
+   - Search for and select: `HA Spotify Podcast Player: Play Filtered Episode`
+   - Fill in the fields:
+     - **Media Player**: Select your media player from dropdown (e.g., media_player.kitchen)
+     - **Podcast URL**: `https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A`
+     - **Filter Keywords**: `Headlines:`
+     - **Start Time**: `0` (or number of seconds to skip intro)
+     - **Episodes to Check**: `5`
+5. Click **Save**
+
+#### Example 2: YAML Automation
+
+```yaml
+description: "Play Daily Aus Headlines on weekday mornings"
+mode: single
+triggers:
+  - trigger: time
+    at: "07:00:00"
+    weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+conditions: []
+actions:
+  - action: ha_spotify_podcast_player.play_filtered_episode
+    data:
+      entity_id: media_player.kitchen
+      podcast_url: "https://open.spotify.com/show/0onVY7weTsqjZLM8y3Tt9A"
+      filter_keywords: "Headlines:"
+      start_time: 0
+      episodes_to_check: 5
+```
 
 ## Service Details
 
